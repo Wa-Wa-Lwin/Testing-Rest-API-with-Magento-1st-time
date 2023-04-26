@@ -23,6 +23,7 @@ class Custom implements CustomInterface
     /**
      * @inheritdoc
      */
+<<<<<<< HEAD
     public function getPost(CustomData $customData)
     {
         // Get value1 and value2 from $customData object
@@ -159,6 +160,13 @@ class Custom implements CustomInterface
         $response = ['success' => false];
 
         if ($value1 === "" && $value2 === null) {
+=======
+    public function getPost($value1,$value2)
+    {
+        $response = ['success' => false];
+
+        if ($value1 === "" && $value2 === "") {
+>>>>>>> parent of 362076b ( ok now for checking one parameter and its value with if conditions such as if it is lower or higher than this particular number, what message will show etc)
             $response = ['success' => true, 'message' => 'Both values are null.'];
             $this->logger->info('Both values are null.');
         } else if ($value1 === null || $value2 === null) {
@@ -172,24 +180,25 @@ class Custom implements CustomInterface
         return $returnArray; 
 
 
-    }*/
+    }
+}
 
-    /*public function getPost($value1,$value2)
-    {
-        $response = ['success' => false];
-        try 
-        {
-            // Your Code here
-            $response = ['success' => true, 'message' => $value1];
-        } 
+
+// public function getPost($value1,$value2)
+//     {
+//         $response = ['success' => false];
+//         try 
+//         {
+//             // Your Code here
+//             $response = ['success' => true, 'message' => $value1];
+//         } 
         
-        catch (\Exception $e) 
-        {
-            $response = ['success' => false, 'message' => $e->getMessage()];
-            $this->logger->info($e->getMessage());
-        }
+//         catch (\Exception $e) 
+//         {
+//             $response = ['success' => false, 'message' => $e->getMessage()];
+//             $this->logger->info($e->getMessage());
+//         }
 
-        $returnArray = json_encode($response);
-        return $returnArray; 
-    }*/
-
+//         $returnArray = json_encode($response);
+//         return $returnArray; 
+//     }
