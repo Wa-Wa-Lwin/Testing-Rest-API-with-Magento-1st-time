@@ -8,8 +8,8 @@ interface CustomInterface
      * @param string $value2
      * @return string
      */
-    public function getPost($value1,$value2);
-    //public function getPost($value);
+    //public function getPost($value1,$value2);
+    public function getPost($value1);
     //public function getPost();
 }
 
