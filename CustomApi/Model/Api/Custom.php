@@ -2,22 +2,136 @@
 namespace MageDelight\CustomApi\Model\Api;
 
 use MageDelight\CustomApi\Api\CustomInterface;
-use Psr\Log\LoggerInterface; 
-use MageDelight\CustomApi\Model\CustomFactory;
+use Psr\Log\LoggerInterface;
+use MageDelight\CustomApi\Model\Data\CustomData;
+use MageDelight\CustomApi\Model\Api\CustomFactory;
 
 class Custom implements CustomInterface 
 {
     protected $logger;
+    protected $customFactory;
+
     public function __construct(
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        CustomFactory $customFactory
     )
     {
         $this->logger = $logger;
+        $this->customFactory = $customFactory;
     }
+    
     /**
      * @inheritdoc
      */
-    public function getPost($value1)
+    public function getPost(CustomData $customData)
+    {
+        // Get value1 and value2 from $customData object
+        $value1 = $customData->getValue1();
+        $value2 = $customData->getValue2();
+
+        $response = ['success' => false];
+
+        if ($value1 < "1.0.0" ) {
+            $response = ['success' => true, 'message' => 'Version Need to be updated.'];
+            $this->logger->info('Version Need to be updated.');
+        } else if ($value1 <= "1.1.2") {
+            $response = ['success' => true, 'message' => 'Notification will be sent.'];
+            $this->logger->info('Notification will be sent.');
+        } else {
+            $response = ['success' => true, 'message' => 'It is up to date.'];
+            $this->logger->info('It is up to date.');
+        }
+
+        $returnArray = json_encode($response);
+        return $returnArray; 
+
+    }
+}
+
+
+// namespace MageDelight\CustomApi\Model\Api;
+
+// use MageDelight\CustomApi\Api\CustomInterface;
+// use Psr\Log\LoggerInterface; 
+// use MageDelight\CustomApi\Model\Data\CustomData;
+
+// class Custom implements CustomInterface 
+// {
+//     protected $logger;
+//     public function __construct(
+//         LoggerInterface $logger
+//     )
+//     {
+//         $this->logger = $logger;
+//     }
+
+//     public function getPost(CustomData $customData)
+//     {
+//         $value1 = $customData->getValue1();
+//         $value2 = $customData->getValue2();
+
+//         // your logic here
+
+//         $response = ['success' => true, 'message' => 'It is up to date.'];
+//         $this->logger->info('It is up to date.');
+
+//         $returnArray = json_encode($response);
+//         return $returnArray; 
+//     }
+// } 
+
+
+// namespace MageDelight\CustomApi\Model\Api;
+
+// use MageDelight\CustomApi\Api\CustomInterface;
+// use Psr\Log\LoggerInterface; 
+// use MageDelight\CustomApi\Model\CustomFactory;
+
+// class Custom implements CustomInterface 
+// {
+//     protected $logger;
+//     public function __construct(
+//         LoggerInterface $logger
+//     )
+//     {
+//         $this->logger = $logger;
+//     }
+//     /**
+//      * @inheritdoc
+//      */
+//     public function getPost($value1)
+//     {
+//         $response = ['success' => false];
+
+//         $version = "1.0.0";
+//         $notification = "2.0.0"; 
+
+//         // $version = $this->getVersion;
+//         // $notification = $this->getNotification; 
+
+//         if ( $value1 < $version ) {
+//             $response = ['success' => true, 'message' => 'Version Need to be updated.'];
+//             $this->logger->info('Version Need to be updated.');
+//         } else if ( $value1 <= $notification ) {
+//             $response = ['success' => true, 'message' => 'Notification will be sent.'];
+//             $this->logger->info('Notification will be sent.');
+//         } else {
+//             $response = ['success' => true, 'message' => 'It is up to date.'];
+//             $this->logger->info('It is up to date.');
+//         }
+
+//         $returnArray = json_encode($response);
+//         if ($returnArray === false) {
+//             $returnArray = json_encode(['success' => false, 'message' => 'Error encoding response.']);
+//         }
+//         return $returnArray;
+
+//     }
+// }
+
+
+
+    /*public function getPost($value1)
     {
         $response = ['success' => false];
 
@@ -38,9 +152,7 @@ class Custom implements CustomInterface
         }
         return $returnArray;
 
-    }
-}
-
+    }*/
  
     /*public function getPost($value1,$value2)
     {
