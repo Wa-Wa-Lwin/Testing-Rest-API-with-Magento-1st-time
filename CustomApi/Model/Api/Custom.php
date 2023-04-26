@@ -24,6 +24,7 @@ class Custom implements CustomInterface
      * @inheritdoc
      */
 <<<<<<< HEAD
+<<<<<<< HEAD
     public function getPost(CustomData $customData)
     {
         // Get value1 and value2 from $customData object
@@ -160,6 +161,13 @@ class Custom implements CustomInterface
         $response = ['success' => false];
 
         if ($value1 === "" && $value2 === null) {
+=======
+    public function getPost($value1,$value2)
+    {
+        $response = ['success' => false];
+
+        if ($value1 === "" && $value2 === "") {
+>>>>>>> parent of 362076b ( ok now for checking one parameter and its value with if conditions such as if it is lower or higher than this particular number, what message will show etc)
 =======
     public function getPost($value1,$value2)
     {
